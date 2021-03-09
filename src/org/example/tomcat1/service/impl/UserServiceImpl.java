@@ -5,17 +5,17 @@ import org.example.tomcat1.bean.LoginationInfo;
 import org.example.tomcat1.bean.RegistrationInfo;
 import org.example.tomcat1.dao.DAOException;
 import org.example.tomcat1.dao.DAOProvider;
-import org.example.tomcat1.dao.UserDAO;
+import org.example.tomcat1.dao.IUserDAO;
 import org.example.tomcat1.service.ServiceException;
-import org.example.tomcat1.service.UserService;
+import org.example.tomcat1.service.IUserService;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 	
 	@Override
 	public User logination(LoginationInfo logInfo) throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
 		
-        UserDAO userDAO = provider.getUserdao();        
+        IUserDAO userDAO = provider.getUserdao();        
         
 		User user = null;
 		
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	public boolean registration(RegistrationInfo regInfo) throws ServiceException {		
 		DAOProvider provider = DAOProvider.getInstance();
 		
-        UserDAO userDAO = provider.getUserdao();        
+        IUserDAO userDAO = provider.getUserdao();        
         
 		boolean regResult = false;
 		

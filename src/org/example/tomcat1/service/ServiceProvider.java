@@ -8,19 +8,19 @@ public final class ServiceProvider {
 
 	private ServiceProvider() {}
 	
-	private final UserService userService = new UserServiceImpl();
+	private final IUserService userService = new UserServiceImpl();
 	
-	private final NewsService newsService = new NewsServiceImpl();
+	private final INewsService newsService = new NewsServiceImpl();
 	
 	public static ServiceProvider getInstance() {
 		return instance;
 	}
 
-	public UserService getUserService() {
+	public IUserService getUserService() {
 		return userService;
 	}
 
-	public NewsService getNewsService() {
+	public INewsService getNewsService() {
 		return newsService;
 	}	
 }

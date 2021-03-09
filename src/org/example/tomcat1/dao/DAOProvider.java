@@ -6,9 +6,9 @@ import org.example.tomcat1.dao.impl.SQLUserDAO;
 public final class DAOProvider {
 	private static final DAOProvider instance = new DAOProvider();	
 	
-	private final UserDAO userdao = new SQLUserDAO();
+	private final IUserDAO userdao = new SQLUserDAO();
 	
-	private final NewsDAO newsDAO = new SQLNewsDAO();
+	private final INewsDAO newsDAO = new SQLNewsDAO();
 	
 	private DAOProvider() {}
 	
@@ -16,11 +16,11 @@ public final class DAOProvider {
 		return instance;
 	}
 
-	public UserDAO getUserdao() {
+	public IUserDAO getUserdao() {
 		return userdao;
 	}
 
-	public NewsDAO getNewsDAO() {
+	public INewsDAO getNewsDAO() {
 		return newsDAO;
 	}	
 }

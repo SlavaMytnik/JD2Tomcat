@@ -8,7 +8,7 @@
   <filter>
     <display-name>CharsetFilter</display-name>
     <filter-name>CharsetFilter</filter-name>
-    <filter-class>org.example.tomcat1.filter.CharsetFilter</filter-class>
+    <filter-class>org.example.tomcat1.controller.filter.CharsetFilter</filter-class>
     <init-param>
     	<param-name>characterEncoding</param-name>
     	<param-value>UTF-8</param-value>
@@ -18,6 +18,10 @@
     <filter-name>CharsetFilter</filter-name>
     <url-pattern>/Controller</url-pattern>
   </filter-mapping>
+  
+  <listener>
+  	<listener-class>org.example.tomcat1.listener.ContextListener</listener-class>
+  </listener>
   
   <servlet>
     <servlet-name>Controller</servlet-name>

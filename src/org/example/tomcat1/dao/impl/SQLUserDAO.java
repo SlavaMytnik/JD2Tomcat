@@ -10,75 +10,59 @@ import org.example.tomcat1.bean.LoginationInfo;
 import org.example.tomcat1.bean.RegistrationInfo;
 import org.example.tomcat1.bean.User;
 import org.example.tomcat1.dao.DAOException;
-import org.example.tomcat1.dao.UserDAO;
+import org.example.tomcat1.dao.IUserDAO;
 
-public class SQLUserDAO implements UserDAO{
+public class SQLUserDAO extends SQLConstants implements IUserDAO{		
 	static {
-		MYSQLDriverLoader.getInstance();
+		SQLDriverLoader.getInstance();
 	}
-	
+
 	@Override
 	public User logination(LoginationInfo logInfo) throws DAOException {
-		Connection con = null;
-		
 		User user = null;
-		
-		try {
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/news_management?useSSL=false&serverTimezone=UTC",
-					"root", "root");
-			
+
+		try (Connection con = DriverManager.getConnection(CONNECTION_HOST, CONNECTION_LOGIN, CONNECTION_PASSWORD)) {		
 			Statement st = con.createStatement();
 			
 			String login = logInfo.getLogin();
 			String password = logInfo.getPassword();
 			
-			ResultSet rs = st.executeQuery("SELECT * FROM users WHERE login='" + login 
-					+ "' AND password='" + password + "' AND status='active';");
+			ResultSet rs = st.executeQuery("SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_LOGIN + " = '" + login 
+					+ "' AND " + COLUMN_PASSWORD + " = '" + password + "' AND " + COLUMN_STATUS + " = '" + STATUS_ACTIVE + "';");
 			
 			if (rs.next()) {
-				String name = rs.getString("name");
-				String surname = rs.getString("surname");
-				String role = rs.getString("role");
+				String name = rs.getString(COLUMN_NAME);
+				String surname = rs.getString(COLUMN_SURNAME);
+				String role = rs.getString(COLUMN_ROLE);
 				
-				user = new User(login, password, name, surname, role);
+				user = new User(login, name, surname, role);
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
-		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				throw new DAOException(e);
-			}
-		}
-
+		} 
+		
 		return user;
 	}
 
 	@Override
 	public boolean registration(RegistrationInfo regInfo) throws DAOException {
-		Connection con = null;
-		
 		Boolean regResult = false;
-		
-		try {
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/news_management?useSSL=false&serverTimezone=UTC",
-					"root", "root");
-			
+		try (Connection con = DriverManager.getConnection(CONNECTION_HOST, CONNECTION_LOGIN, CONNECTION_PASSWORD)) {		
 			Statement st = con.createStatement();
 			
 			String login = regInfo.getLogin();
 			
-			ResultSet rs = st.executeQuery("SELECT * FROM users WHERE login='" + login + "';");
+			ResultSet rs = st.executeQuery("SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_LOGIN + " = '" + login + "';");
 			
 			if (!rs.next()) {
 				String password = regInfo.getPassword();
 				String name = regInfo.getName();
 				String surname = regInfo.getSurname();
 				
-				String STRING_QUARY = "INSERT INTO users (login, password, name, surname, status, role) "
+				String STRING_QUARY = "INSERT INTO " + TABLE_USERS + " (" + COLUMN_LOGIN + ", " + COLUMN_PASSWORD 
+						+ ", " + COLUMN_NAME + ", " + COLUMN_SURNAME + ", " + COLUMN_STATUS + ", " + COLUMN_ROLE + ") "
 						+ "VALUES ('" + login + "', '" + password + "', '" + name 
-						+ "', '" + surname + "', 'active', 'user');";
+						+ "', '" + surname + "', '" + STATUS_ACTIVE + "', '" + ROLE_USER + "');";
 				
 				int col = st.executeUpdate(STRING_QUARY);
 				
@@ -88,13 +72,7 @@ public class SQLUserDAO implements UserDAO{
 			}			
 		} catch (SQLException e) {
 			throw new DAOException(e);
-		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				throw new DAOException(e);
-			}
-		}
+		} 
 
 		return regResult;
 	}

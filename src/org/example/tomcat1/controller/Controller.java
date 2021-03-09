@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.example.tomcat1.controller.command.Command;
+import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.CommandProvider;
+import org.example.tomcat1.service.ServiceException;
 
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private static final String PAR_OR_ATTR_COMMAND = "command";
 	
 	private final CommandProvider provider = new CommandProvider(); 
 
@@ -29,10 +32,15 @@ public class Controller extends HttpServlet {
 		process(request, response);
 	}
 	
-	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String name = request.getParameter("command");
+	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter(PAR_OR_ATTR_COMMAND);
 		
-		Command command = provider.takeCommand(name);		
-		command.execute(request, response);
+		ICommand command = provider.takeCommand(name);
+		
+		try {
+			command.execute(request, response);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 }

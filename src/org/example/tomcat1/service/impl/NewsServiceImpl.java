@@ -5,17 +5,17 @@ import java.util.List;
 import org.example.tomcat1.bean.News;
 import org.example.tomcat1.dao.DAOException;
 import org.example.tomcat1.dao.DAOProvider;
-import org.example.tomcat1.dao.NewsDAO;
-import org.example.tomcat1.service.NewsService;
+import org.example.tomcat1.dao.INewsDAO;
+import org.example.tomcat1.service.INewsService;
 import org.example.tomcat1.service.ServiceException;
 
-public class NewsServiceImpl implements NewsService {
+public class NewsServiceImpl implements INewsService {
 
 	@Override
 	public List<News> getAll() throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
 		
-		NewsDAO newsDAO = provider.getNewsDAO();
+		INewsDAO newsDAO = provider.getNewsDAO();
 		
 		List<News> news;
 		
@@ -32,7 +32,7 @@ public class NewsServiceImpl implements NewsService {
 	public News getById(int id) throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
 		
-		NewsDAO newsDAO = provider.getNewsDAO();
+		INewsDAO newsDAO = provider.getNewsDAO();
 		
 		News news;
 		
@@ -49,7 +49,7 @@ public class NewsServiceImpl implements NewsService {
 	public Boolean editById(int id, String title, String brief, String content) throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
 		
-		NewsDAO newsDAO = provider.getNewsDAO();
+		INewsDAO newsDAO = provider.getNewsDAO();
 		
 		Boolean edited;
 		
@@ -66,7 +66,7 @@ public class NewsServiceImpl implements NewsService {
 	public Boolean deleteById(int id) throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
 		
-		NewsDAO newsDAO = provider.getNewsDAO();
+		INewsDAO newsDAO = provider.getNewsDAO();
 		
 		Boolean deleted;
 		
