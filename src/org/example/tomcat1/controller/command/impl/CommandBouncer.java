@@ -12,6 +12,7 @@ import org.example.tomcat1.controller.command.ICommandBouncer;
 import org.example.tomcat1.service.ServiceException;
 
 public class CommandBouncer extends CommandConstants implements ICommandBouncer {
+	private static final String FORM_FIELD_REGEXP = "[a-zA-Z0-9]+";
 
 	@Override
 	public boolean checkSession(HttpServletRequest request, HttpServletResponse response) 
@@ -61,10 +62,10 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 		
 		if (login == null || login.length() < 4 || login.length() > 100 
 				|| password == null || password.length() < 4 || password.length() > 100 
-				|| !login.matches("[à-ÿÀ-ßa-zA-Z0-9]+") 
-				|| !password.matches("[à-ÿÀ-ßa-zA-Z0-9]+") 
-				|| (name.length() > 0 && !name.matches("[à-ÿÀ-ßa-zA-Z0-9]+")) 
-				|| (surname.length() > 0 && !surname.matches("[à-ÿÀ-ßa-zA-Z0-9]+"))
+				|| !login.matches(FORM_FIELD_REGEXP) 
+				|| !password.matches(FORM_FIELD_REGEXP) 
+				|| (name.length() > 0 && !name.matches(FORM_FIELD_REGEXP)) 
+				|| (surname.length() > 0 && !surname.matches(FORM_FIELD_REGEXP))
 				|| name.length() > 100 || surname.length() > 100) {
 			
 			try {
@@ -88,8 +89,8 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 		
 		if (login == null || login.length() < 4 || login.length() > 100 
 				|| password == null || password.length() < 4 || password.length() > 100 
-				|| !login.matches("[à-ÿÀ-ßa-zA-Z0-9]+") 
-				|| !password.matches("[à-ÿÀ-ßa-zA-Z0-9]+")) {
+				|| !login.matches(FORM_FIELD_REGEXP) 
+				|| !password.matches(FORM_FIELD_REGEXP)) {
 			
 			try {
 				response.sendRedirect("Controller?command=gotoredirectpage&" + PAR_OR_ATTR_ERROR 
