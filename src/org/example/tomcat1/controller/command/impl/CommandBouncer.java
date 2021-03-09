@@ -13,7 +13,10 @@ import org.example.tomcat1.service.ServiceException;
 
 public class CommandBouncer extends CommandConstants implements ICommandBouncer {
 	private static final String FORM_FIELD_REGEXP = "[a-zA-Z0-9]+";
-
+	
+	private static final int LIMIT_MIN = 4;
+	private static final int LIMIT_MAX = 100;
+	
 	@Override
 	public boolean checkSession(HttpServletRequest request, HttpServletResponse response) 
 			throws ServiceException {
@@ -60,13 +63,13 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 		String name = regInfo.getName();
 		String surname = regInfo.getSurname();	
 		
-		if (login == null || login.length() < 4 || login.length() > 100 
-				|| password == null || password.length() < 4 || password.length() > 100 
+		if (login == null || login.length() < LIMIT_MIN || login.length() > LIMIT_MAX 
+				|| password == null || password.length() < LIMIT_MIN || password.length() > LIMIT_MAX 
 				|| !login.matches(FORM_FIELD_REGEXP) 
 				|| !password.matches(FORM_FIELD_REGEXP) 
 				|| (name.length() > 0 && !name.matches(FORM_FIELD_REGEXP)) 
 				|| (surname.length() > 0 && !surname.matches(FORM_FIELD_REGEXP))
-				|| name.length() > 100 || surname.length() > 100) {
+				|| name.length() > LIMIT_MAX || surname.length() > LIMIT_MAX) {
 			
 			try {
 				response.sendRedirect("Controller?command=gotoredirectpage&" + PAR_OR_ATTR_ERROR 
@@ -87,8 +90,8 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 		String login = logInfo.getLogin();
 		String password = logInfo.getPassword();	
 		
-		if (login == null || login.length() < 4 || login.length() > 100 
-				|| password == null || password.length() < 4 || password.length() > 100 
+		if (login == null || login.length() < LIMIT_MIN || login.length() > LIMIT_MAX 
+				|| password == null || password.length() < LIMIT_MIN || password.length() > LIMIT_MAX 
 				|| !login.matches(FORM_FIELD_REGEXP) 
 				|| !password.matches(FORM_FIELD_REGEXP)) {
 			
