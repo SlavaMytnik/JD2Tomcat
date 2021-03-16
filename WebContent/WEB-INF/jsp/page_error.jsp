@@ -6,10 +6,14 @@
 <head>
 	<meta charset="utf-8">
 	<title>News site</title>
+	<style type="text/css">
+		<%@include file="resources/css/main.css" %>	
+	</style>
+	<%@include file="resources/localization/localization.jsp" %>
 </head>
 <body>
 	<div class="simpletext">
-		<c:redirect url="Controller?command=gotoindexpage" />
+		Site error!
 	</div>
 </body>
 </html>

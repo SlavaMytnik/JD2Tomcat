@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandBouncer;
 import org.example.tomcat1.controller.command.impl.CommandConstants;
@@ -17,7 +18,7 @@ public class DeleteNews extends CommandConstants implements ICommand {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ServiceException {		
+			throws ServletException, IOException, ControllerException {		
 		CommandBouncer bouncer = new CommandBouncer();		
 		
 		if (!bouncer.checkSessionAndAuth(request, response)) return;
@@ -33,7 +34,7 @@ public class DeleteNews extends CommandConstants implements ICommand {
 			
 			if (editResult) response.sendRedirect("Controller?command=gotomainpage");
 		} catch (ServiceException | NumberFormatException e) {
-			throw new ServiceException(e);
+			throw new ControllerException(e);
 		}
 	}
 }

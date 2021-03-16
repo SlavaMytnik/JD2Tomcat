@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.example.tomcat1.bean.News;
+import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandBouncer;
 import org.example.tomcat1.controller.command.impl.CommandConstants;
@@ -20,7 +21,7 @@ public class GoToNewsPage extends CommandConstants implements ICommand {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ServiceException {		
+			throws ServletException, IOException, ControllerException {		
 		CommandBouncer bouncer = new CommandBouncer();		
 		
 		if (!bouncer.checkSessionAndAuth(request, response)) return;
@@ -47,7 +48,7 @@ public class GoToNewsPage extends CommandConstants implements ICommand {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/page_news_show.jsp");
 			requestDispatcher.forward(request, response);		
 		} catch (ServiceException | NumberFormatException e) {
-			throw new ServiceException(e);
+			throw new ControllerException(e);
 		}	
 	}
 }

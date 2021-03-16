@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.example.tomcat1.bean.LoginationInfo;
 import org.example.tomcat1.bean.User;
+import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandBouncer;
 import org.example.tomcat1.controller.command.impl.CommandConstants;
@@ -20,7 +21,7 @@ public class Login extends CommandConstants implements ICommand {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ServiceException {		
+			throws ServletException, IOException, ControllerException {		
 		CommandBouncer bouncer = new CommandBouncer();		
 		
 		if (!bouncer.checkSession(request, response)) return;
@@ -53,7 +54,7 @@ public class Login extends CommandConstants implements ICommand {
 			
 			response.sendRedirect("Controller?command=gotomainpage");
 		} catch (ServiceException e) {
-			throw new ServiceException(e);
+			throw new ControllerException(e);
 		}
 	}
 }

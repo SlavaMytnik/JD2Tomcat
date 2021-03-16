@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.example.tomcat1.bean.LoginationInfo;
 import org.example.tomcat1.bean.RegistrationInfo;
+import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommandBouncer;
-import org.example.tomcat1.service.ServiceException;
 
 public class CommandBouncer extends CommandConstants implements ICommandBouncer {
 	private static final String FORM_FIELD_REGEXP = "[a-zA-Z0-9]+";
@@ -19,14 +19,14 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 	
 	@Override
 	public boolean checkSession(HttpServletRequest request, HttpServletResponse response) 
-			throws ServiceException {
+			throws ControllerException {
 		HttpSession session = request.getSession();
 		
 		if (session == null) {
 			try {
 				response.sendRedirect("Controller?command=gotoindexpage");
 			} catch (IOException e) {
-				throw new ServiceException(e);
+				throw new ControllerException(e);
 			}
 			
 			return false;
@@ -37,7 +37,7 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 
 	@Override
 	public boolean checkSessionAndAuth(HttpServletRequest request, HttpServletResponse response)
-			throws ServiceException {
+			throws ControllerException {
 		HttpSession session = request.getSession();
 		
 		Boolean isAuth = (Boolean) session.getAttribute(PAR_OR_ATTR_AUTH);
@@ -46,7 +46,7 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 			try {
 				response.sendRedirect("Controller?command=gotoindexpage");
 			} catch (IOException e) {
-				throw new ServiceException(e);
+				throw new ControllerException(e);
 			}
 			
 			return false;
@@ -57,7 +57,7 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 
 	@Override
 	public boolean checkRegistrationInfo(HttpServletResponse response, 
-			RegistrationInfo regInfo) throws ServiceException {
+			RegistrationInfo regInfo) throws ControllerException {
 		String login = regInfo.getLogin();
 		String password = regInfo.getPassword();	
 		String name = regInfo.getName();
@@ -75,7 +75,7 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 				response.sendRedirect("Controller?command=gotoredirectpage&" + PAR_OR_ATTR_ERROR 
 						+ "=" + ERROR_REGISTRATION);
 			} catch (IOException e) {
-				throw new ServiceException(e);
+				throw new ControllerException(e);
 			}
 			
 			return false;
@@ -86,7 +86,7 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 
 	@Override
 	public boolean checkLoginationInfo(HttpServletResponse response, 
-			LoginationInfo logInfo) throws ServiceException {
+			LoginationInfo logInfo) throws ControllerException {
 		String login = logInfo.getLogin();
 		String password = logInfo.getPassword();	
 		
@@ -99,7 +99,7 @@ public class CommandBouncer extends CommandConstants implements ICommandBouncer 
 				response.sendRedirect("Controller?command=gotoredirectpage&" + PAR_OR_ATTR_ERROR 
 						+ "=" + ERROR_LOGINATION);
 			} catch (IOException e) {
-				throw new ServiceException(e);
+				throw new ControllerException(e);
 			}
 			
 			return false;

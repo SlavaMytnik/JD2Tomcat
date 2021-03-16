@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.example.tomcat1.bean.News;
+import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandConstants;
 import org.example.tomcat1.service.INewsService;
@@ -21,7 +22,7 @@ public class GoToIndexPage extends CommandConstants implements ICommand {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ServiceException {
+			throws ServletException, IOException, ControllerException {
 		ServiceProvider provider = ServiceProvider.getInstance();
 		
 		HttpSession session = request.getSession();
@@ -39,7 +40,7 @@ public class GoToIndexPage extends CommandConstants implements ICommand {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/page_index.jsp");
 			requestDispatcher.forward(request, response);			
 		} catch (ServiceException e) {
-			throw new ServiceException(e);
+			throw new ControllerException(e);
 		}	
 	}
 }

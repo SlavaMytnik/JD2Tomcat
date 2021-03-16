@@ -3,9 +3,9 @@ package org.example.tomcat1.dao.impl;
 import java.util.ResourceBundle;
 
 public class SQLConstants {
-	public static String CONNECTION_HOST;
-	public static String CONNECTION_LOGIN;
-	public static String CONNECTION_PASSWORD;
+	public static final String CONNECTION_HOST;
+	public static final String CONNECTION_LOGIN;
+	public static final String CONNECTION_PASSWORD;
 	
 	static {
 		String BUNDLE_SQL = "sql.sql";

@@ -13,10 +13,7 @@ import org.example.tomcat1.bean.News;
 import org.example.tomcat1.dao.DAOException;
 import org.example.tomcat1.dao.INewsDAO;
 
-public class SQLNewsDAO extends SQLConstants implements INewsDAO {	
-	static {
-		SQLDriverLoader.getInstance();
-	}
+public class SQLNewsDAO extends SQLConstants implements INewsDAO {
 
 	@Override
 	public List<News> getAll() throws DAOException {

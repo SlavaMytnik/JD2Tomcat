@@ -7,16 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandBouncer;
 import org.example.tomcat1.controller.command.impl.CommandConstants;
-import org.example.tomcat1.service.ServiceException;
 
 public class Logout extends CommandConstants implements ICommand{
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ServiceException {		
+			throws ServletException, IOException, ControllerException {		
 		CommandBouncer bouncer = new CommandBouncer();		
 		
 		if (!bouncer.checkSessionAndAuth(request, response)) return;
