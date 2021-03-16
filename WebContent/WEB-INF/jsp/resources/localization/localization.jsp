@@ -27,3 +27,4 @@
 <fmt:message bundle="${fmt_loc}" key="error.logination" var="fmt_error_logination" />
 <fmt:message bundle="${fmt_loc}" key="redirect" var="fmt_redirect" />
 <fmt:message bundle="${fmt_loc}" key="necessarily" var="fmt_necessarily" />
+<fmt:message bundle="${fmt_loc}" key="site.error" var="fmt_site_error" />

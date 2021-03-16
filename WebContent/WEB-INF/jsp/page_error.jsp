@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="simpletext">
-		Site error!
+		<c:out value=" ${fmt_site_error} " />
 	</div>
 </body>
 </html>
