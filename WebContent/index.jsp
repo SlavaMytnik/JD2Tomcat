@@ -8,8 +8,6 @@
 	<title>News site</title>
 </head>
 <body>
-	<div class="simpletext">
-		<c:redirect url="Controller?command=gotoindexpage" />
-	</div>
+	<c:redirect url="Controller?command=gotoindexpage" />
 </body>
 </html>
