@@ -61,9 +61,7 @@
 		</table>	
 	</c:if>
 	<c:if test="${role == null || !role.equals('admin')}">
-	<%
-		response.sendRedirect("Controller?command=gotoindexpage");	
-	%>
+		<c:redirect url="Controller?command=gotoindexpage" />
 	</c:if>
 </body>
 </html>
