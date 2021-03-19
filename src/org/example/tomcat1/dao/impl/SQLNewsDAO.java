@@ -81,10 +81,10 @@ public class SQLNewsDAO implements INewsDAO {
 		try (Connection con = DriverManager.getConnection(CONNECTION_HOST, CONNECTION_LOGIN, CONNECTION_PASSWORD)) {
 			Statement st = con.createStatement();
 			
-			String STRING_QUARY = "UPDATE " + TABLE_NEWS + " SET " + COLUMN_TITLE + " = '" + title + "', " + COLUMN_BRIEF + " = '" 
+			String stringQuery = "UPDATE " + TABLE_NEWS + " SET " + COLUMN_TITLE + " = '" + title + "', " + COLUMN_BRIEF + " = '" 
 					+ brief + "', " + COLUMN_CONTENT + " = '" + content + "' WHERE " + COLUMN_ID + " = " + id + ";";
 			
-			int col = st.executeUpdate(STRING_QUARY);
+			int col = st.executeUpdate(stringQuery);
 			
 			if (col > 0) {
 				editResult = true;
@@ -103,10 +103,10 @@ public class SQLNewsDAO implements INewsDAO {
 		try (Connection con = DriverManager.getConnection(CONNECTION_HOST, CONNECTION_LOGIN, CONNECTION_PASSWORD)) {
 			Statement st = con.createStatement();
 			
-			String STRING_QUARY = "UPDATE " + TABLE_NEWS + " SET " + COLUMN_STATUS + " = '" + STATUS_DELETED 
+			String stringQuery = "UPDATE " + TABLE_NEWS + " SET " + COLUMN_STATUS + " = '" + STATUS_DELETED 
 					+ "' WHERE " + COLUMN_ID + " = " + id + ";";
 			
-			int col = st.executeUpdate(STRING_QUARY);
+			int col = st.executeUpdate(stringQuery);
 			
 			if (col > 0) {
 				delResult = true;

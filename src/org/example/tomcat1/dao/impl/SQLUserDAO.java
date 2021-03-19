@@ -58,12 +58,12 @@ public class SQLUserDAO implements IUserDAO {
 				String name = regInfo.getName();
 				String surname = regInfo.getSurname();
 				
-				String STRING_QUARY = "INSERT INTO " + TABLE_USERS + " (" + COLUMN_LOGIN + ", " + COLUMN_PASSWORD 
+				String stringQuery = "INSERT INTO " + TABLE_USERS + " (" + COLUMN_LOGIN + ", " + COLUMN_PASSWORD 
 						+ ", " + COLUMN_NAME + ", " + COLUMN_SURNAME + ", " + COLUMN_STATUS + ", " + COLUMN_ROLE + ") "
 						+ "VALUES ('" + login + "', '" + password + "', '" + name 
 						+ "', '" + surname + "', '" + STATUS_ACTIVE + "', '" + ROLE_USER + "');";
 				
-				int col = st.executeUpdate(STRING_QUARY);
+				int col = st.executeUpdate(stringQuery);
 				
 				if (col > 0) {
 					regResult = true;

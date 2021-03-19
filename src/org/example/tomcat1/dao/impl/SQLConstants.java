@@ -8,16 +8,16 @@ public final class SQLConstants {
 	public static final String CONNECTION_PASSWORD;
 	
 	static {
-		String BUNDLE_SQL = "sql.sql";
-		String BUNDLE_HOST = "host";
-		String BUNDLE_LOGIN = "login";
-		String BUNDLE_PASSWORD = "password";
+		String bundleSQL = "sql.sql";
+		String bundleHost = "host";
+		String bundleLogin = "login";
+		String bundlePassword = "password";
 		
-		ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_SQL);
+		ResourceBundle bundle = ResourceBundle.getBundle(bundleSQL);
 		
-		CONNECTION_HOST = bundle.getString(BUNDLE_HOST);
-		CONNECTION_LOGIN = bundle.getString(BUNDLE_LOGIN);
-		CONNECTION_PASSWORD = bundle.getString(BUNDLE_PASSWORD);
+		CONNECTION_HOST = bundle.getString(bundleHost);
+		CONNECTION_LOGIN = bundle.getString(bundleLogin);
+		CONNECTION_PASSWORD = bundle.getString(bundlePassword);
 	}
 	
 	public static final String TABLE_USERS = "users";
