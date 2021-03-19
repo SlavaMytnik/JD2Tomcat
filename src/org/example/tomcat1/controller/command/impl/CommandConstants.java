@@ -1,6 +1,6 @@
 package org.example.tomcat1.controller.command.impl;
 
-public class CommandConstants {
+public final class CommandConstants {
 	public static final String PAR_OR_ATTR_LOCAL = "local";
 	public static final String PAR_OR_ATTR_URL = "url";
 	public static final String PAR_OR_ATTR_AUTH = "auth";
@@ -24,4 +24,6 @@ public class CommandConstants {
 	public static final String STATUS_ACTIVE = "active";
 	
 	public static final String ROLE_USER = "user";
+	
+	private CommandConstants() {}
 }

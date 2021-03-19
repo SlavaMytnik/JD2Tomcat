@@ -11,12 +11,13 @@ import org.example.tomcat1.bean.RegistrationInfo;
 import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandBouncer;
-import org.example.tomcat1.controller.command.impl.CommandConstants;
 import org.example.tomcat1.service.ServiceException;
 import org.example.tomcat1.service.ServiceProvider;
 import org.example.tomcat1.service.IUserService;
 
-public class SaveUser extends CommandConstants implements ICommand {
+import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
+
+public class SaveUser implements ICommand {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 

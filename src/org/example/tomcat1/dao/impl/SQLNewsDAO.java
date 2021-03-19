@@ -13,7 +13,9 @@ import org.example.tomcat1.bean.News;
 import org.example.tomcat1.dao.DAOException;
 import org.example.tomcat1.dao.INewsDAO;
 
-public class SQLNewsDAO extends SQLConstants implements INewsDAO {
+import static org.example.tomcat1.dao.impl.SQLConstants.*;
+
+public class SQLNewsDAO implements INewsDAO {
 
 	@Override
 	public List<News> getAll() throws DAOException {

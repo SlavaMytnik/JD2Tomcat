@@ -11,7 +11,9 @@ import org.example.tomcat1.bean.RegistrationInfo;
 import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommandBouncer;
 
-public class CommandBouncer extends CommandConstants implements ICommandBouncer {
+import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
+
+public class CommandBouncer implements ICommandBouncer {
 	private static final String FORM_FIELD_REGEXP = "[a-zA-Z0-9]+";
 	
 	private static final int LIMIT_MIN = 4;

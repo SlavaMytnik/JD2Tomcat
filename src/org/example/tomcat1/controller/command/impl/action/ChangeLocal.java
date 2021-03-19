@@ -10,9 +10,10 @@ import javax.servlet.http.HttpSession;
 import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandBouncer;
-import org.example.tomcat1.controller.command.impl.CommandConstants;
 
-public class ChangeLocal extends CommandConstants implements ICommand {
+import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
+
+public class ChangeLocal implements ICommand {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 

@@ -13,12 +13,13 @@ import org.example.tomcat1.bean.News;
 import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandBouncer;
-import org.example.tomcat1.controller.command.impl.CommandConstants;
 import org.example.tomcat1.service.INewsService;
 import org.example.tomcat1.service.ServiceException;
 import org.example.tomcat1.service.ServiceProvider;
 
-public class GoToMainPage extends CommandConstants implements ICommand {
+import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
+
+public class GoToMainPage implements ICommand {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 

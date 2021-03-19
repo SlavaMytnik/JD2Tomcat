@@ -12,7 +12,9 @@ import org.example.tomcat1.bean.User;
 import org.example.tomcat1.dao.DAOException;
 import org.example.tomcat1.dao.IUserDAO;
 
-public class SQLUserDAO extends SQLConstants implements IUserDAO{
+import static org.example.tomcat1.dao.impl.SQLConstants.*;
+
+public class SQLUserDAO implements IUserDAO {
 
 	@Override
 	public User logination(LoginationInfo logInfo) throws DAOException {
