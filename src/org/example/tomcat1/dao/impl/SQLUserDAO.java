@@ -33,12 +33,12 @@ public final class SQLUserDAO implements IUserDAO {
 			ResultSet rs = st.executeQuery("SELECT * FROM "
 					+ TABLE_USERS
 					+ " WHERE "
-					+ COLUMN_LOGIN
-					+ " = '" + login
-					+ "' AND " + COLUMN_PASSWORD
-					+ " = '" + password
-					+ "' AND " + COLUMN_STATUS
-					+ " = '" + STATUS_ACTIVE + "';");
+					+ COLUMN_LOGIN + " = '" + login
+					+ "' AND "
+					+ COLUMN_PASSWORD + " = '" + password
+					+ "' AND "
+					+ COLUMN_STATUS + " = '" + STATUS_ACTIVE
+					+ "';");
 
 			if (rs.next()) {
 				String name = rs.getString(COLUMN_NAME);
@@ -68,8 +68,9 @@ public final class SQLUserDAO implements IUserDAO {
 
 			ResultSet rs = st.executeQuery("SELECT * FROM "
 					+ TABLE_USERS
-					+ " WHERE " + COLUMN_LOGIN
-					+ " = '" + login + "';");
+					+ " WHERE "
+					+ COLUMN_LOGIN + " = '" + login
+					+ "';");
 
 			if (!rs.next()) {
 				String password = regInfo.getPassword();
@@ -78,17 +79,31 @@ public final class SQLUserDAO implements IUserDAO {
 
 				String stringQuery = "INSERT INTO "
 						+ TABLE_USERS
-						+ " (" + COLUMN_LOGIN
-						+ ", " + COLUMN_PASSWORD
-						+ ", " + COLUMN_NAME
-						+ ", " + COLUMN_SURNAME
-						+ ", " + COLUMN_STATUS
-						+ ", " + COLUMN_ROLE + ") "
-						+ "VALUES ('" + login + "', '"
-						+ password + "', '" + name
-						+ "', '" + surname
-						+ "', '" + STATUS_ACTIVE
-						+ "', '" + ROLE_USER + "');";
+						+ " ("
+						+ COLUMN_LOGIN
+						+ ", "
+						+ COLUMN_PASSWORD
+						+ ", "
+						+ COLUMN_NAME
+						+ ", "
+						+ COLUMN_SURNAME
+						+ ", "
+						+ COLUMN_STATUS
+						+ ", "
+						+ COLUMN_ROLE
+						+ ") VALUES ('"
+						+ login
+						+ "', '"
+						+ password
+						+ "', '"
+						+ name
+						+ "', '"
+						+ surname
+						+ "', '"
+						+ STATUS_ACTIVE
+						+ "', '"
+						+ ROLE_USER
+						+ "');";
 
 				int col = st.executeUpdate(stringQuery);
 

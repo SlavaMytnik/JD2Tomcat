@@ -40,8 +40,7 @@ public final class DeleteNews
 			Boolean editResult = newsService.deleteById(id);
 
 			if (editResult) {
-				response.sendRedirect(
-						"Controller?"
+				response.sendRedirect("Controller?"
 						+ "command=gotomainpage");
 			}
 		} catch (ServiceException | NumberFormatException e) {

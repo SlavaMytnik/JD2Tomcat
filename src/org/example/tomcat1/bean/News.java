@@ -189,10 +189,18 @@ public final class News implements Serializable {
 
 	@Override
 	public String toString() {
-		return "News [id=" + id + ", title="
-				+ title + ", brief="
-				+ brief + ", content="
-				+ content + ", date=" + date
-				+ ", status=" + status + "]";
+		return "News ["
+				+ "id=" + id
+				+ ", "
+				+ "title=" + title
+				+ ", "
+				+ "brief=" + brief
+				+ ", "
+				+ "content=" + content
+				+ ", "
+				+ "date=" + date
+				+ ", "
+				+ "status=" + status
+				+ "]";
 	}
 }

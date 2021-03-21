@@ -51,8 +51,7 @@ public final class Login
 			if (user == null) {
 				response.sendRedirect("Controller?"
 						+ "command=gotoredirectpage&"
-						+ PAR_OR_ATTR_ERROR
-						+ "=" + ERROR_LOGINATION);
+						+ PAR_OR_ATTR_ERROR + "=" + ERROR_LOGINATION);
 
 				return;
 			}

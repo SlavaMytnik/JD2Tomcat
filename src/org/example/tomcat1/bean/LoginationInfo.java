@@ -87,8 +87,10 @@ public final class LoginationInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "LoginationInfo [login="
-				+ login + ", password="
-				+ password + "]";
+		return "LoginationInfo ["
+				+ "login=" + login
+				+ ", "
+				+ "password=" + password
+				+ "]";
 	}
 }

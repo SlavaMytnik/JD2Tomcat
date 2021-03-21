@@ -26,11 +26,10 @@ public final class ChangeLocal
 		if (!bouncer.checkSession(request, response)) {
 			return;
 		}
-
-		HttpSession session = request.getSession();
-
+		
 		String local = request.getParameter(PAR_OR_ATTR_LOCAL);
 
+		HttpSession session = request.getSession();
 		session.setAttribute(PAR_OR_ATTR_LOCAL, local);
 
 		String url = (String) session.getAttribute(PAR_OR_ATTR_URL);

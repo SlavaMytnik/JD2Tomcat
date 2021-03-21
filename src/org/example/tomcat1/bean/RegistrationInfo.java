@@ -172,11 +172,18 @@ public final class RegistrationInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "RegistrationInfo [login=" + login
-				+ ", password=" + password
-				+ ", name=" + name
-				+ ", surname=" + surname
-				+ ", status=" + status
-				+ ", role=" + role + "]";
+		return "RegistrationInfo ["
+				+ "login=" + login
+				+ ", "
+				+ "password=" + password
+				+ ", "
+				+ "name=" + name
+				+ ", "
+				+ "surname=" + surname
+				+ ", "
+				+ "status=" + status
+				+ ", "
+				+ "role=" + role
+				+ "]";
 	}
 }

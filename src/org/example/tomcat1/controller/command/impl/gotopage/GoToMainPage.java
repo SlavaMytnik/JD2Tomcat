@@ -46,6 +46,7 @@ public final class GoToMainPage
 					+ "?" + request.getQueryString();
 
 			session.setAttribute(PAR_OR_ATTR_URL, url);
+			
 			request.setAttribute(PAR_OR_ATTR_NEWS, news);
 
 			RequestDispatcher requestDispatcher =

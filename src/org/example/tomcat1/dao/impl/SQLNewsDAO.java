@@ -29,8 +29,8 @@ public final class SQLNewsDAO implements INewsDAO {
 
 			ResultSet rs = st.executeQuery("SELECT * FROM "
 					+ TABLE_NEWS
-					+ " WHERE " + COLUMN_STATUS
-					+ " = '" + STATUS_ACTIVE
+					+ " WHERE "
+					+ COLUMN_STATUS + " = '" + STATUS_ACTIVE
 					+ "' ORDER BY date DESC;");
 
 			news = new ArrayList<News>();
@@ -69,8 +69,9 @@ public final class SQLNewsDAO implements INewsDAO {
 
 			ResultSet rs = st.executeQuery("SELECT * FROM "
 					+ TABLE_NEWS
-					+ " WHERE " + COLUMN_ID
-					+ " = " + id + ";");
+					+ " WHERE "
+					+ COLUMN_ID + " = " + id
+					+ ";");
 
 			if (rs.next()) {
 				String title = rs.getString(COLUMN_TITLE);
@@ -104,14 +105,15 @@ public final class SQLNewsDAO implements INewsDAO {
 
 			String stringQuary = "UPDATE "
 					+ TABLE_NEWS
-					+ " SET " + COLUMN_TITLE
-					+ " = '" + title + "', "
-					+ COLUMN_BRIEF + " = '"
-					+ brief + "', "
-					+ COLUMN_CONTENT + " = '"
-					+ content + "' WHERE "
-					+ COLUMN_ID + " = "
-					+ id + ";";
+					+ " SET "
+					+ COLUMN_TITLE + " = '" + title
+					+ "', "
+					+ COLUMN_BRIEF + " = '" + brief
+					+ "', "
+					+ COLUMN_CONTENT + " = '" + content
+					+ "' WHERE "
+					+ COLUMN_ID + " = " + id
+					+ ";";
 
 			int col = st.executeUpdate(stringQuary);
 
@@ -135,11 +137,13 @@ public final class SQLNewsDAO implements INewsDAO {
 				CONNECTION_PASSWORD)) {
 			Statement st = con.createStatement();
 
-			String stringQuary = "UPDATE " + TABLE_NEWS
-					+ " SET " + COLUMN_STATUS
-					+ " = '" + STATUS_DELETED
-					+ "' WHERE " + COLUMN_ID
-					+ " = " + id + ";";
+			String stringQuary = "UPDATE "
+					+ TABLE_NEWS
+					+ " SET "
+					+ COLUMN_STATUS + " = '" + STATUS_DELETED
+					+ "' WHERE "
+					+ COLUMN_ID + " = " + id
+					+ ";";
 
 			int col = st.executeUpdate(stringQuary);
 

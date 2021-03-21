@@ -28,8 +28,7 @@ public final class CommandBouncer
 
 		if (session == null) {
 			try {
-				response.sendRedirect(
-						"Controller?"
+				response.sendRedirect("Controller?"
 						+ "command=gotoindexpage");
 			} catch (IOException e) {
 				throw new ControllerException(e);
@@ -52,8 +51,7 @@ public final class CommandBouncer
 
 		if (session == null || isAuth == null || !isAuth) {
 			try {
-				response.sendRedirect(
-						"Controller?"
+				response.sendRedirect("Controller?"
 						+ "command=gotoindexpage");
 			} catch (IOException e) {
 				throw new ControllerException(e);
@@ -92,8 +90,7 @@ public final class CommandBouncer
 			try {
 				response.sendRedirect("Controller?"
 						+ "command=gotoredirectpage&"
-						+ PAR_OR_ATTR_ERROR
-						+ "=" + ERROR_REGISTRATION);
+						+ PAR_OR_ATTR_ERROR + "=" + ERROR_REGISTRATION);
 			} catch (IOException e) {
 				throw new ControllerException(e);
 			}
@@ -123,8 +120,7 @@ public final class CommandBouncer
 			try {
 				response.sendRedirect("Controller?"
 						+ "command=gotoredirectpage&"
-						+ PAR_OR_ATTR_ERROR
-						+ "=" + ERROR_LOGINATION);
+						+ PAR_OR_ATTR_ERROR + "=" + ERROR_LOGINATION);
 			} catch (IOException e) {
 				throw new ControllerException(e);
 			}

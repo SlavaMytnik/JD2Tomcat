@@ -48,8 +48,8 @@ public final class ModifyNews
 			response.sendRedirect("Controller?"
 					+ "command=gotonewspage&"
 					+ PAR_OR_ATTR_ID + "=" + id
-					+ "&" + PAR_OR_ATTR_EDITED
-					+ "=" + edited);
+					+ "&"
+					+ PAR_OR_ATTR_EDITED + "=" + edited);
 		} catch (ServiceException | NumberFormatException e) {
 			throw new ControllerException(e);
 		}
