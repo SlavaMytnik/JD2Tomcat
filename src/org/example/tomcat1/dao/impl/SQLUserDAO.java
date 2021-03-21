@@ -58,6 +58,7 @@ public final class SQLUserDAO implements IUserDAO {
 	public boolean registration(final RegistrationInfo regInfo)
 			throws DAOException {
 		Boolean regResult = false;
+		
 		try (Connection con = DriverManager.getConnection(
 				CONNECTION_HOST,
 				CONNECTION_LOGIN,
