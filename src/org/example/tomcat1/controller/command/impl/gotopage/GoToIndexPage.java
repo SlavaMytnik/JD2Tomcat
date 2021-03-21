@@ -19,29 +19,35 @@ import org.example.tomcat1.service.ServiceProvider;
 
 import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
-public class GoToIndexPage implements ICommand {
-	
+public final class GoToIndexPage
+	implements ICommand {
+
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException {
+	public void execute(final HttpServletRequest request,
+			final HttpServletResponse response)
+			throws ServletException, IOException,
+			ControllerException {
 		ServiceProvider provider = ServiceProvider.getInstance();
-		
+
 		HttpSession session = request.getSession();
-		
+
 		INewsService newsService = provider.getNewsService();
-		
+
 		try {
 			List<News> news = newsService.getAll();
-			
-			String url = request.getRequestURL() + "?" + request.getQueryString();
-			
-			session.setAttribute(PAR_OR_ATTR_URL, url);			
+
+			String url = request.getRequestURL()
+					+ "?" + request.getQueryString();
+
+			session.setAttribute(PAR_OR_ATTR_URL, url);
 			request.setAttribute(PAR_OR_ATTR_NEWS, news);
-			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/page_index.jsp");
-			requestDispatcher.forward(request, response);			
+
+			RequestDispatcher requestDispatcher =
+					request.getRequestDispatcher(
+							"/WEB-INF/jsp/page_index.jsp");
+			requestDispatcher.forward(request, response);
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
-		}	
+		}
 	}
 }

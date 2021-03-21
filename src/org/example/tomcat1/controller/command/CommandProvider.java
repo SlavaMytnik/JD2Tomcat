@@ -16,9 +16,9 @@ import org.example.tomcat1.controller.command.impl.gotopage.GoToNewsPage;
 import org.example.tomcat1.controller.command.impl.gotopage.GoToRedirectPage;
 import org.example.tomcat1.controller.command.impl.gotopage.GoToRegistrationPage;
 
-public class CommandProvider {
+public final class CommandProvider {
 	private Map<CommandName, ICommand> commands = new HashMap<>();
-	
+
 	public CommandProvider() {
 		commands.put(CommandName.LOGIN, new Login());
 		commands.put(CommandName.LOGOUT, new Logout());
@@ -30,13 +30,16 @@ public class CommandProvider {
 		commands.put(CommandName.GOTOMAINPAGE, new GoToMainPage());
 		commands.put(CommandName.GOTONEWSPAGE, new GoToNewsPage());
 		commands.put(CommandName.GOTOEDITPAGE, new GoToEditPage());
-		commands.put(CommandName.GOTOREGISTRATIONPAGE, new GoToRegistrationPage());
-		commands.put(CommandName.GOTOREDIRECTPAGE, new GoToRedirectPage());
-	}	
-	
-	public ICommand takeCommand(String name) {
-		CommandName commandName = CommandName.valueOf(name.toUpperCase());
-		
+		commands.put(CommandName.GOTOREGISTRATIONPAGE,
+				new GoToRegistrationPage());
+		commands.put(CommandName.GOTOREDIRECTPAGE,
+				new GoToRedirectPage());
+	}
+
+	public ICommand takeCommand(final String name) {
+		CommandName commandName = CommandName.valueOf(
+				name.toUpperCase());
+
 		return commands.get(commandName);
 	}
 }

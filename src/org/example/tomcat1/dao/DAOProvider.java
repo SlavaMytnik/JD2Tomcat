@@ -4,16 +4,16 @@ import org.example.tomcat1.dao.impl.SQLNewsDAO;
 import org.example.tomcat1.dao.impl.SQLUserDAO;
 
 public final class DAOProvider {
-	private static final DAOProvider instance = new DAOProvider();	
-	
+	private static final DAOProvider INSTANCE = new DAOProvider();
+
 	private final IUserDAO userdao = new SQLUserDAO();
-	
+
 	private final INewsDAO newsDAO = new SQLNewsDAO();
-	
+
 	private DAOProvider() {}
-	
+
 	public static DAOProvider getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	public IUserDAO getUserdao() {
@@ -22,5 +22,5 @@ public final class DAOProvider {
 
 	public INewsDAO getNewsDAO() {
 		return newsDAO;
-	}	
+	}
 }

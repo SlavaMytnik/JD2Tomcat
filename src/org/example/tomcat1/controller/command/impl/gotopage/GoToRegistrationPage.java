@@ -14,22 +14,30 @@ import org.example.tomcat1.controller.command.impl.CommandBouncer;
 
 import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
-public class GoToRegistrationPage implements ICommand {
+public final class GoToRegistrationPage
+	implements ICommand {
 	
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException {		
-		CommandBouncer bouncer = new CommandBouncer();		
-		
-		if (!bouncer.checkSession(request, response)) return;
-		
-		HttpSession session = request.getSession();		
-		
-		String url = request.getRequestURL() + "?" + request.getQueryString();
-			
-		session.setAttribute(PAR_OR_ATTR_URL, url);	
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/page_registration.jsp");
-		requestDispatcher.forward(request, response);		
+	public void execute(final HttpServletRequest request,
+			final HttpServletResponse response)
+			throws ServletException, IOException,
+			ControllerException {
+		CommandBouncer bouncer = new CommandBouncer();
+
+		if (!bouncer.checkSession(request, response)) {
+			return;
+		}
+
+		HttpSession session = request.getSession();
+
+		String url = request.getRequestURL() + "?"
+				+ request.getQueryString();
+
+		session.setAttribute(PAR_OR_ATTR_URL, url);
+
+		RequestDispatcher requestDispatcher =
+				request.getRequestDispatcher(
+						"/WEB-INF/jsp/page_registration.jsp");
+		requestDispatcher.forward(request, response);
 	}
 }

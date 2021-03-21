@@ -13,19 +13,27 @@ import org.example.tomcat1.controller.command.impl.CommandBouncer;
 
 import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
-public class GoToRedirectPage implements ICommand {
-	
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException {		
-		CommandBouncer bouncer = new CommandBouncer();		
-		
-		if (!bouncer.checkSession(request, response)) return;
+public final class GoToRedirectPage
+	implements ICommand {
 
-		request.setAttribute(PAR_OR_ATTR_ERROR, request.getParameter(PAR_OR_ATTR_ERROR));	
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/page_redirect.jsp");
-		requestDispatcher.forward(request, response);		
+	@Override
+	public void execute(final HttpServletRequest request,
+			final HttpServletResponse response)
+			throws ServletException, IOException,
+			ControllerException {
+		CommandBouncer bouncer = new CommandBouncer();
+
+		if (!bouncer.checkSession(request, response)) {
+			return;
+		}
+
+		request.setAttribute(PAR_OR_ATTR_ERROR,
+				request.getParameter(PAR_OR_ATTR_ERROR));
+
+		RequestDispatcher requestDispatcher =
+				request.getRequestDispatcher(
+						"/WEB-INF/jsp/page_redirect.jsp");
+		requestDispatcher.forward(request, response);
 	}
 }
 

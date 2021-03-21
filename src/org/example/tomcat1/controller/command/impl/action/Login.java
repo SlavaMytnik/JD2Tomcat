@@ -18,33 +18,42 @@ import org.example.tomcat1.service.IUserService;
 
 import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
-public class Login implements ICommand {
-	
+public final class Login
+	implements ICommand {
+
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException {		
-		CommandBouncer bouncer = new CommandBouncer();		
-		
-		if (!bouncer.checkSession(request, response)) return;
-		
+	public void execute(final HttpServletRequest request,
+			final HttpServletResponse response)
+			throws ServletException, IOException,
+			ControllerException {
+		CommandBouncer bouncer = new CommandBouncer();
+
+		if (!bouncer.checkSession(request, response)) {
+			return;
+		}
+
 		ServiceProvider provider = ServiceProvider.getInstance();
-		
+
 		IUserService userService = provider.getUserService();
-		
+
 		String login = request.getParameter(PAR_OR_ATTR_LOGIN);
-		String password = request.getParameter(PAR_OR_ATTR_PASSWORD);	
-		
+		String password = request.getParameter(PAR_OR_ATTR_PASSWORD);
+
 		LoginationInfo logInfo = new LoginationInfo(login, password);
-		
-		if (!bouncer.checkLoginationInfo(response, logInfo)) return;
-		
-		try {			
+
+		if (!bouncer.checkLoginationInfo(response, logInfo)) {
+			return;
+		}
+
+		try {
 			User user = userService.logination(logInfo);
-			
+
 			if (user == null) {
-				response.sendRedirect("Controller?command=gotoredirectpage&" + PAR_OR_ATTR_ERROR 
+				response.sendRedirect("Controller?"
+						+ "command=gotoredirectpage&"
+						+ PAR_OR_ATTR_ERROR
 						+ "=" + ERROR_LOGINATION);
-				
+
 				return;
 			}
 
@@ -52,8 +61,9 @@ public class Login implements ICommand {
 			session.setAttribute(PAR_OR_ATTR_AUTH, true);
 			session.setAttribute(PAR_OR_ATTR_USERNAME, login);
 			session.setAttribute(PAR_OR_ATTR_ROLE, user.getRole());
-			
-			response.sendRedirect("Controller?command=gotomainpage");
+
+			response.sendRedirect("Controller?"
+					+ "command=gotomainpage");
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
 		}

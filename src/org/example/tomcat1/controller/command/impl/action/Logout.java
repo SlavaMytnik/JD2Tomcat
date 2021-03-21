@@ -13,21 +13,27 @@ import org.example.tomcat1.controller.command.impl.CommandBouncer;
 
 import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
-public class Logout implements ICommand{
-	
+public final class Logout
+	implements ICommand{
+
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException {		
-		CommandBouncer bouncer = new CommandBouncer();		
-		
-		if (!bouncer.checkSessionAndAuth(request, response)) return;
-		
-		HttpSession session = request.getSession();		
-		
+	public void execute(final HttpServletRequest request,
+			final HttpServletResponse response)
+			throws ServletException, IOException,
+			ControllerException {
+		CommandBouncer bouncer = new CommandBouncer();
+
+		if (!bouncer.checkSessionAndAuth(request, response)) {
+			return;
+		}
+
+		HttpSession session = request.getSession();
+
 		session.removeAttribute(PAR_OR_ATTR_AUTH);
 		session.removeAttribute(PAR_OR_ATTR_USERNAME);
 		session.removeAttribute(PAR_OR_ATTR_ROLE);
-		
-		response.sendRedirect("Controller?command=gotoindexpage");		
+
+		response.sendRedirect("Controller?"
+				+ "command=gotoindexpage");
 	}
 }

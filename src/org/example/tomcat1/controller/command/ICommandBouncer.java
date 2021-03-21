@@ -8,12 +8,16 @@ import org.example.tomcat1.bean.RegistrationInfo;
 import org.example.tomcat1.controller.ControllerException;
 
 public interface ICommandBouncer {
-	boolean checkSession(HttpServletRequest request, HttpServletResponse response) 
+	boolean checkSession(HttpServletRequest request,
+			HttpServletResponse response)
 			throws ControllerException;
-	boolean checkSessionAndAuth(HttpServletRequest request, HttpServletResponse response) 
+	boolean checkSessionAndAuth(HttpServletRequest request,
+			HttpServletResponse response)
 			throws ControllerException;
-	boolean checkRegistrationInfo(HttpServletResponse response, RegistrationInfo regInfo) 
+	boolean checkRegistrationInfo(HttpServletResponse response,
+			RegistrationInfo regInfo)
 			throws ControllerException;
-	boolean checkLoginationInfo(HttpServletResponse response, LoginationInfo logInfo) 
+	boolean checkLoginationInfo(HttpServletResponse response,
+			LoginationInfo logInfo)
 			throws ControllerException;
 }

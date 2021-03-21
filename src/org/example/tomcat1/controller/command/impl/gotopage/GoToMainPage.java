@@ -19,33 +19,41 @@ import org.example.tomcat1.service.ServiceProvider;
 
 import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
-public class GoToMainPage implements ICommand {
-	
+public final class GoToMainPage
+	implements ICommand {
+
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException {
-		CommandBouncer bouncer = new CommandBouncer();		
-		
-		if (!bouncer.checkSessionAndAuth(request, response)) return;
-		
-		HttpSession session = request.getSession();		
-		
+	public void execute(final HttpServletRequest request,
+			final HttpServletResponse response)
+			throws ServletException, IOException,
+			ControllerException {
+		CommandBouncer bouncer = new CommandBouncer();
+
+		if (!bouncer.checkSessionAndAuth(request, response)) {
+			return;
+		}
+
+		HttpSession session = request.getSession();
+
 		ServiceProvider provider = ServiceProvider.getInstance();
-		
+
 		INewsService newsService = provider.getNewsService();
 
 		try {
 			List<News> news = newsService.getAll();
-			
-			String url = request.getRequestURL() + "?" + request.getQueryString();
-			
-			session.setAttribute(PAR_OR_ATTR_URL, url);			
-			request.setAttribute(PAR_OR_ATTR_NEWS, news);			
-			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/page_main.jsp");
-			requestDispatcher.forward(request, response);		
+
+			String url = request.getRequestURL()
+					+ "?" + request.getQueryString();
+
+			session.setAttribute(PAR_OR_ATTR_URL, url);
+			request.setAttribute(PAR_OR_ATTR_NEWS, news);
+
+			RequestDispatcher requestDispatcher =
+					request.getRequestDispatcher(
+							"/WEB-INF/jsp/page_main.jsp");
+			requestDispatcher.forward(request, response);
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
-		}	
+		}
 	}
 }

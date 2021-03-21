@@ -9,39 +9,41 @@ import org.example.tomcat1.dao.IUserDAO;
 import org.example.tomcat1.service.ServiceException;
 import org.example.tomcat1.service.IUserService;
 
-public class UserServiceImpl implements IUserService {
-	
+public final class UserServiceImpl implements IUserService {
+
 	@Override
-	public User logination(LoginationInfo logInfo) throws ServiceException {
+	public User logination(final LoginationInfo logInfo)
+			throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
-		
-        IUserDAO userDAO = provider.getUserdao();        
-        
+
+        IUserDAO userDAO = provider.getUserdao();
+
 		User user = null;
-		
+
 		try {
 			user = userDAO.logination(logInfo);
-		} catch(DAOException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
-		
+
 		return user;
 	}
 
 	@Override
-	public boolean registration(RegistrationInfo regInfo) throws ServiceException {		
+	public boolean registration(final RegistrationInfo regInfo)
+			throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
-		
-        IUserDAO userDAO = provider.getUserdao();        
-        
+
+        IUserDAO userDAO = provider.getUserdao();
+
 		boolean regResult = false;
-		
+
 		try {
 			regResult = userDAO.registration(regInfo);
-		} catch(DAOException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
-		
+
 		return regResult;
 	}
 }

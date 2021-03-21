@@ -6,16 +6,16 @@ public class DAOException extends Exception {
 	public DAOException() {
 		super();
 	}
-	
-	public DAOException(String message) {
+
+	public DAOException(final String message) {
 		super(message);
 	}
-	
-	public DAOException(Exception e) {
+
+	public DAOException(final Exception e) {
 		super(e);
 	}
 
-	public DAOException(String message, Exception e) {
+	public DAOException(final String message, final Exception e) {
 		super(message, e);
 	}
 }

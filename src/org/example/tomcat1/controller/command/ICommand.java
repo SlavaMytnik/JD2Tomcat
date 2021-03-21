@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.example.tomcat1.controller.ControllerException;
 
-public interface ICommand {	
-	void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException;
+public interface ICommand {
+	void execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException,
+			IOException, ControllerException;
 }

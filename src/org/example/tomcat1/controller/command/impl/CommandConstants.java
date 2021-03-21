@@ -22,8 +22,8 @@ public final class CommandConstants {
 	public static final String ERROR_REGISTRATION = "registration";
 
 	public static final String STATUS_ACTIVE = "active";
-	
+
 	public static final String ROLE_USER = "user";
-	
+
 	private CommandConstants() {}
 }

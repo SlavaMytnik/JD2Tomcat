@@ -6,16 +6,16 @@ public class ControllerException extends Exception {
 	public ControllerException() {
 		super();
 	}
-	
-	public ControllerException(String message) {
+
+	public ControllerException(final String message) {
 		super(message);
 	}
-	
-	public ControllerException(Exception e) {
+
+	public ControllerException(final Exception e) {
 		super(e);
 	}
-	
-	public ControllerException(String message, Exception e) {
+
+	public ControllerException(final String message, final Exception e) {
 		super(message, e);
 	}
 }

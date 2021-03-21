@@ -15,30 +15,41 @@ import org.example.tomcat1.service.ServiceProvider;
 
 import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
-public class ModifyNews implements ICommand {
-	
+public final class ModifyNews
+	implements ICommand {
+
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException {		
-		CommandBouncer bouncer = new CommandBouncer();		
-		
-		if (!bouncer.checkSessionAndAuth(request, response)) return;
+	public void execute(final HttpServletRequest request,
+			final HttpServletResponse response)
+			throws ServletException, IOException,
+			ControllerException {
+		CommandBouncer bouncer = new CommandBouncer();
+
+		if (!bouncer.checkSessionAndAuth(request, response)) {
+			return;
+		}
 
 		ServiceProvider provider = ServiceProvider.getInstance();
-		
+
 		INewsService newsService = provider.getNewsService();
 
 		try {
-			Integer id = Integer.valueOf(request.getParameter(PAR_OR_ATTR_ID));
-			
+			Integer id = Integer.valueOf(
+					request.getParameter(PAR_OR_ATTR_ID));
+
 			String title = request.getParameter(PAR_OR_ATTR_TITLE);
 			String brief = request.getParameter(PAR_OR_ATTR_BRIEF);
-			String content = request.getParameter(PAR_OR_ATTR_CONTENT);
-			
-			Boolean edited = newsService.editById(id, title, brief, content);			
-			
-			response.sendRedirect("Controller?command=gotonewspage&" + PAR_OR_ATTR_ID + "=" + id 
-					+ "&" + PAR_OR_ATTR_EDITED + "=" + edited);
+			String content = request.getParameter(
+					PAR_OR_ATTR_CONTENT);
+
+			Boolean edited = newsService.editById(
+					id, title, brief, content);
+
+			response.sendRedirect("Controller?"
+					+ "command=gotonewspage&"
+					+ PAR_OR_ATTR_ID + "=" + id
+					+ "&" + PAR_OR_ATTR_EDITED
+					+ "=" + edited);
 		} catch (ServiceException | NumberFormatException e) {
 			throw new ControllerException(e);
 		}

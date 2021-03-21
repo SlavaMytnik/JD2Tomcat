@@ -18,38 +18,48 @@ import org.example.tomcat1.service.ServiceProvider;
 
 import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
-public class GoToNewsPage implements ICommand {
-	
+public final class GoToNewsPage
+	implements ICommand {
+
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException, ControllerException {		
-		CommandBouncer bouncer = new CommandBouncer();		
-		
-		if (!bouncer.checkSessionAndAuth(request, response)) return;
-		
-		HttpSession session = request.getSession();		
+	public void execute(final HttpServletRequest request,
+			final HttpServletResponse response)
+			throws ServletException, IOException,
+			ControllerException {
+		CommandBouncer bouncer = new CommandBouncer();
+
+		if (!bouncer.checkSessionAndAuth(request, response)) {
+			return;
+		}
+
+		HttpSession session = request.getSession();
 
 		ServiceProvider provider = ServiceProvider.getInstance();
-		
+
 		INewsService newsService = provider.getNewsService();
 
 		try {
-			Integer id = Integer.valueOf(request.getParameter(PAR_OR_ATTR_ID));
-			
-			Boolean edited = Boolean.valueOf(request.getParameter(PAR_OR_ATTR_EDITED));
+			Integer id = Integer.valueOf(
+					request.getParameter(PAR_OR_ATTR_ID));
+
+			Boolean edited = Boolean.valueOf(
+					request.getParameter(PAR_OR_ATTR_EDITED));
 
 			News news = newsService.getById(id);
-			
-			String url = request.getRequestURL() + "?" + request.getQueryString();
-			
-			session.setAttribute(PAR_OR_ATTR_URL, url);			
-			request.setAttribute(PAR_OR_ATTR_NEWS, news);	
-			request.setAttribute(PAR_OR_ATTR_EDITED, edited);	
-			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/page_news_show.jsp");
-			requestDispatcher.forward(request, response);		
+
+			String url = request.getRequestURL() + "?"
+					+ request.getQueryString();
+
+			session.setAttribute(PAR_OR_ATTR_URL, url);
+			request.setAttribute(PAR_OR_ATTR_NEWS, news);
+			request.setAttribute(PAR_OR_ATTR_EDITED, edited);
+
+			RequestDispatcher requestDispatcher =
+					request.getRequestDispatcher(
+							"/WEB-INF/jsp/page_news_show.jsp");
+			requestDispatcher.forward(request, response);
 		} catch (ServiceException | NumberFormatException e) {
 			throw new ControllerException(e);
-		}	
+		}
 	}
 }
