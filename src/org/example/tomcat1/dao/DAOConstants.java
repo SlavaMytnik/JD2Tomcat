@@ -1,24 +1,12 @@
-package org.example.tomcat1.dao.impl;
+package org.example.tomcat1.dao;
 
-import java.util.ResourceBundle;
-
-public final class SQLConstants {
-	public static final String CONNECTION_HOST;
-	public static final String CONNECTION_LOGIN;
-	public static final String CONNECTION_PASSWORD;
-
-	static {
-		String bundleSql = "sql.sql";
-		String bundleHost = "host";
-		String bundleLogin = "login";
-		String bundlePassword = "password";
-
-		ResourceBundle bundle = ResourceBundle.getBundle(bundleSql);
-
-		CONNECTION_HOST = bundle.getString(bundleHost);
-		CONNECTION_LOGIN = bundle.getString(bundleLogin);
-		CONNECTION_PASSWORD = bundle.getString(bundlePassword);
-	}
+public final class DAOConstants {
+	public static final String DB_NAME = "sql.sql";
+	public static final String DB_DRIVER = "driver";
+	public static final String CONNECTION_HOST = "host";
+	public static final String CONNECTION_LOGIN = "login";
+	public static final String CONNECTION_PASSWORD = "password";
+	public static final String CONNECTION_POOL_SIZE = "poolsize";
 
 	public static final String TABLE_USERS = "users";
 	public static final String TABLE_NEWS = "news";
@@ -40,5 +28,5 @@ public final class SQLConstants {
 
 	public static final String ROLE_USER = "user";
 
-	private SQLConstants() {}
+	private DAOConstants() {}
 }

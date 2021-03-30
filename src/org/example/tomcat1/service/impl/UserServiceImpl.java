@@ -16,7 +16,7 @@ public final class UserServiceImpl implements IUserService {
 			throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
 
-        IUserDAO userDAO = provider.getUserdao();
+        IUserDAO userDAO = provider.getUserDAO();
 
 		User user = null;
 
@@ -34,7 +34,7 @@ public final class UserServiceImpl implements IUserService {
 			throws ServiceException {
 		DAOProvider provider = DAOProvider.getInstance();
 
-        IUserDAO userDAO = provider.getUserdao();
+        IUserDAO userDAO = provider.getUserDAO();
 
 		boolean regResult = false;
 

@@ -1,5 +1,7 @@
 package org.example.tomcat1.controller.command.impl;
 
+import static org.example.tomcat1.controller.ControllerConstants.*;
+
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +12,6 @@ import org.example.tomcat1.bean.LoginationInfo;
 import org.example.tomcat1.bean.RegistrationInfo;
 import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommandBouncer;
-
-import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
 public final class CommandBouncer
 		implements ICommandBouncer {

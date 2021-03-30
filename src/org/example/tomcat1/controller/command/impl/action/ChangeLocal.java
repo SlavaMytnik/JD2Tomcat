@@ -1,5 +1,7 @@
 package org.example.tomcat1.controller.command.impl.action;
 
+import static org.example.tomcat1.controller.ControllerConstants.*;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -10,8 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.example.tomcat1.controller.ControllerException;
 import org.example.tomcat1.controller.command.ICommand;
 import org.example.tomcat1.controller.command.impl.CommandBouncer;
-
-import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
 public final class ChangeLocal
 	implements ICommand {

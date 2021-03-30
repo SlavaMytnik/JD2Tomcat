@@ -1,5 +1,7 @@
 package org.example.tomcat1.controller.command.impl.gotopage;
 
+import static org.example.tomcat1.controller.ControllerConstants.*;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -16,8 +18,6 @@ import org.example.tomcat1.controller.command.impl.CommandBouncer;
 import org.example.tomcat1.service.INewsService;
 import org.example.tomcat1.service.ServiceException;
 import org.example.tomcat1.service.ServiceProvider;
-
-import static org.example.tomcat1.controller.command.impl.CommandConstants.*;
 
 public final class GoToMainPage
 	implements ICommand {

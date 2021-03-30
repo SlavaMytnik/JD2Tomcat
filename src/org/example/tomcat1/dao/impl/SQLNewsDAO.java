@@ -1,7 +1,6 @@
 package org.example.tomcat1.dao.impl;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,24 +9,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.tomcat1.bean.News;
+import org.example.tomcat1.dao.DAOConnectionPool;
 import org.example.tomcat1.dao.DAOException;
 import org.example.tomcat1.dao.INewsDAO;
 
-import static org.example.tomcat1.dao.impl.SQLConstants.*;
+import static org.example.tomcat1.dao.DAOConstants.*;
 
 public final class SQLNewsDAO implements INewsDAO {
+	private static final DAOConnectionPool CONNECTION_POOL;
+
+	static {
+		CONNECTION_POOL = DAOConnectionPool.getInstance();
+	}
 
 	@Override
 	public List<News> getAll() throws DAOException {
 		List<News> news = null;
 
-		try (Connection con = DriverManager.getConnection(
-				CONNECTION_HOST,
-				CONNECTION_LOGIN,
-				CONNECTION_PASSWORD)) {
-			Statement st = con.createStatement();
+		Connection con = null;
 
-			ResultSet rs = st.executeQuery("SELECT * FROM "
+		Statement st = null;
+
+		ResultSet rs = null;
+
+		try {
+			con = CONNECTION_POOL.getConnection();
+
+			st = con.createStatement();
+
+			rs = st.executeQuery("SELECT * FROM "
 					+ TABLE_NEWS
 					+ " WHERE "
 					+ COLUMN_STATUS + " = '" + STATUS_ACTIVE
@@ -52,6 +62,8 @@ public final class SQLNewsDAO implements INewsDAO {
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
+		} finally {
+			CONNECTION_POOL.closeConnection(con, st, rs);
 		}
 
 		return news;
@@ -61,13 +73,18 @@ public final class SQLNewsDAO implements INewsDAO {
 	public News getById(final int id) throws DAOException {
 		News news = null;
 
-		try (Connection con = DriverManager.getConnection(
-				CONNECTION_HOST,
-				CONNECTION_LOGIN,
-				CONNECTION_PASSWORD)) {
-			Statement st = con.createStatement();
+		Connection con = null;
 
-			ResultSet rs = st.executeQuery("SELECT * FROM "
+		Statement st = null;
+
+		ResultSet rs = null;
+
+		try {
+			con = CONNECTION_POOL.getConnection();
+
+			st = con.createStatement();
+
+			rs = st.executeQuery("SELECT * FROM "
 					+ TABLE_NEWS
 					+ " WHERE "
 					+ COLUMN_ID + " = " + id
@@ -86,6 +103,8 @@ public final class SQLNewsDAO implements INewsDAO {
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
+		} finally {
+			CONNECTION_POOL.closeConnection(con, st, rs);
 		}
 
 		return news;
@@ -97,13 +116,16 @@ public final class SQLNewsDAO implements INewsDAO {
 			throws DAOException {
 		Boolean editResult = false;
 
-		try (Connection con = DriverManager.getConnection(
-				CONNECTION_HOST,
-				CONNECTION_LOGIN,
-				CONNECTION_PASSWORD)) {
-			Statement st = con.createStatement();
+		Connection con = null;
 
-			String stringQuary = "UPDATE "
+		Statement st = null;
+
+		try {
+			con = CONNECTION_POOL.getConnection();
+
+			st = con.createStatement();
+
+			String query = "UPDATE "
 					+ TABLE_NEWS
 					+ " SET "
 					+ COLUMN_TITLE + " = '" + title
@@ -115,13 +137,15 @@ public final class SQLNewsDAO implements INewsDAO {
 					+ COLUMN_ID + " = " + id
 					+ ";";
 
-			int col = st.executeUpdate(stringQuary);
+			int col = st.executeUpdate(query);
 
 			if (col > 0) {
 				editResult = true;
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
+		} finally {
+			CONNECTION_POOL.closeConnection(con, st);
 		}
 
 		return editResult;
@@ -131,13 +155,16 @@ public final class SQLNewsDAO implements INewsDAO {
 	public Boolean deleteById(final int id) throws DAOException {
 		Boolean delResult = false;
 
-		try (Connection con = DriverManager.getConnection(
-				CONNECTION_HOST,
-				CONNECTION_LOGIN,
-				CONNECTION_PASSWORD)) {
-			Statement st = con.createStatement();
+		Connection con = null;
 
-			String stringQuary = "UPDATE "
+		Statement st = null;
+
+		try {
+			con = CONNECTION_POOL.getConnection();
+
+			st = con.createStatement();
+			
+			String query = "UPDATE "
 					+ TABLE_NEWS
 					+ " SET "
 					+ COLUMN_STATUS + " = '" + STATUS_DELETED
@@ -145,13 +172,15 @@ public final class SQLNewsDAO implements INewsDAO {
 					+ COLUMN_ID + " = " + id
 					+ ";";
 
-			int col = st.executeUpdate(stringQuary);
+			int col = st.executeUpdate(query);
 
 			if (col > 0) {
 				delResult = true;
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
+		} finally {
+			CONNECTION_POOL.closeConnection(con, st);
 		}
 
 		return delResult;

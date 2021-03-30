@@ -1,6 +1,6 @@
-package org.example.tomcat1.controller.command.impl;
+package org.example.tomcat1.controller;
 
-public final class CommandConstants {
+public final class ControllerConstants {
 	public static final String PAR_OR_ATTR_LOCAL = "local";
 	public static final String PAR_OR_ATTR_URL = "url";
 	public static final String PAR_OR_ATTR_AUTH = "auth";
@@ -17,7 +17,9 @@ public final class CommandConstants {
 	public static final String PAR_OR_ATTR_CONTENT = "content";
 	public static final String PAR_OR_ATTR_EDITED = "edited";
 	public static final String PAR_OR_ATTR_NEWS = "news";
-
+	public static final String PAR_OR_ATTR_COMMAND = "command";
+	public static final String PAR_OR_ATTR_CONNECTION_SUCCESS = "connection";
+	
 	public static final String ERROR_LOGINATION = "logination";
 	public static final String ERROR_REGISTRATION = "registration";
 
@@ -25,5 +27,5 @@ public final class CommandConstants {
 
 	public static final String ROLE_USER = "user";
 
-	private CommandConstants() {}
+	private ControllerConstants() {}
 }
